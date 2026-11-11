@@ -1,0 +1,28 @@
+/* Custom Scrollbar untuk tampilan lebih bersih */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1; 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8; 
+}
+
+/* Membatasi teks judul produk maksimal 2 baris (mencegah kartu berantakan) */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    min-height: 2.5rem; /* Menjaga tinggi tetap konsisten meski judulnya pendek */
+}
+
+/* Efek angkat sedikit saat produk di-hover */
+.card-hover:hover {
+    transform: translateY(-3px);
+}

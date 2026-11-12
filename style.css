@@ -1,50 +1,47 @@
-/* Mengimpor Font Utama (Inter untuk teks biasa, Playfair Display untuk judul elegan) */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap');
-
+/* Custom Styles to enhance Tailwind */
 body {
-    font-family: 'Inter', sans-serif;
-    scroll-behavior: smooth;
+    background-color: #fdfbf7;
 }
 
-h1, h2, .font-serif {
-    font-family: 'Playfair Display', serif;
+/* Hide scrollbar for horizontal scrolling elements but keep functionality */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-/* Background Hero Section */
-.hero-bg {
-    /* Gradasi transparan agar teks terbaca, ditumpuk di atas gambar latar */
-    background-image: linear-gradient(to right, rgba(249, 246, 240, 0.95) 45%, rgba(249, 246, 240, 0.2)), 
-                      url('https://images.unsplash.com/photo-1596482163907-55099276d494?q=80&w=2000&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-}
-
-/* Optimasi Background Hero untuk Layar HP (Mobile) */
-@media (max-width: 768px) {
-    .hero-bg {
-        /* Di layar HP, gradasi dibuat lebih gelap dari atas ke bawah agar seluruh teks aman */
-        background-image: linear-gradient(to bottom, rgba(249, 246, 240, 0.95) 30%, rgba(249, 246, 240, 0.8)), 
-                          url('https://images.unsplash.com/photo-1596482163907-55099276d494?q=80&w=2000&auto=format&fit=crop');
-    }
-}
-
-/* Membatasi teks judul produk maksimal 2 baris agar kotak kartu sama rata */
+/* Membatasi teks judul produk maksimal 2 baris (Agar Grid rapi) */
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;  
     overflow: hidden;
-    min-height: 2.5rem; 
+    min-height: 2.75rem; 
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 6px;
+/* Card Hover Effect */
+.product-card {
+    transition: all 0.3s ease;
 }
-::-webkit-scrollbar-track {
-    background: #F9F6F0;
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(139, 90, 43, 0.15), 0 8px 10px -6px rgba(139, 90, 43, 0.1);
 }
-::-webkit-scrollbar-thumb {
-    background: #8B5A2B;
-    border-radius: 10px;
+
+.product-img-wrapper img {
+    transition: transform 0.5s ease;
+}
+.product-card:hover .product-img-wrapper img {
+    transform: scale(1.05);
+}
+
+/* Toast Animation */
+@keyframes slideUpFade {
+    0% { opacity: 0; transform: translate(-50%, 20px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+}
+.toast-enter {
+    animation: slideUpFade 0.4s ease forwards;
 }

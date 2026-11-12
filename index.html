@@ -1,216 +1,391 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pusat Kerajinan Banua - Marketplace UMKM Kalsel</title>
-    <!-- Script Tailwind CSS -->
+    <title>KriyaBanua - Marketplace Kerajinan Lokal Kalimantan Selatan</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Konfigurasi Warna Khusus (Harus tetap di HTML jika pakai CDN) -->
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Hubungkan ke file CSS eksternal -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind Config for Custom Colors/Fonts -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
                     colors: {
-                        earth: { base: '#F9F6F0', dark: '#4A3320', accent: '#8B5A2B', green: '#556B2F', card: '#FFFFFF' }
+                        kriya: {
+                            light: '#fdfbf7',   
+                            earth: '#d4a373',   
+                            brown: '#8b5a2b',   
+                            dark: '#3e2723',    
+                            green: '#606c38',   
+                        }
                     }
                 }
             }
         }
     </script>
-    <!-- Link ke file CSS terpisah -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Ikon FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-earth-base text-gray-800">
+<body class="text-gray-800 font-sans antialiased">
 
-    <!-- NAVBAR -->
-    <nav class="absolute w-full z-50 top-0 py-4 md:py-5">
-        <div class="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
-            <div class="text-xl md:text-2xl font-serif font-bold text-earth-dark">Kriya<span class="text-earth-accent">Lokal</span></div>
-            
-            <!-- Menu Kanan -->
-            <div class="flex items-center gap-4 md:gap-6">
-                <a href="#marketplace" class="hidden md:block text-sm font-medium text-earth-dark hover:text-earth-accent transition">Belanja</a>
-                <button onclick="bukaModalJualan()" class="hidden md:block text-sm font-medium text-earth-dark hover:text-earth-accent transition">Mulai Jualan</button>
-                
-                <div class="relative cursor-pointer text-earth-dark hover:text-earth-accent transition">
-                    <i class="fas fa-shopping-bag text-lg md:text-xl"></i>
-                    <span class="absolute -top-1.5 -right-1.5 bg-earth-accent text-white text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-kriya-earth/20 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer">
+                    <div class="w-10 h-10 rounded-full bg-kriya-brown flex items-center justify-center mr-3 text-white">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl text-kriya-dark tracking-wide">KriyaBanua.</span>
                 </div>
-                <div class="w-8 h-8 md:w-9 md:h-9 bg-gray-200 rounded-full overflow-hidden border border-earth-dark/20">
-                    <img src="https://ui-avatars.com/api/?name=Pembeli&background=4A3320&color=fff" alt="Profile" class="w-full h-full object-cover">
-                </div>
-                <!-- Tombol Menu HP -->
-                <button class="md:hidden text-earth-dark text-xl"><i class="fas fa-bars"></i></button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- HERO SECTION (Landing Page Elegan) -->
-    <header class="hero-bg min-h-screen flex items-center pt-16 relative">
-        <div class="max-w-7xl mx-auto px-4 md:px-6 w-full relative z-10">
-            <div class="max-w-2xl">
-                <!-- Badge Atas -->
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-md bg-[#EFE9DD] text-earth-dark text-[10px] md:text-xs font-semibold tracking-wide mb-4 md:mb-6 uppercase">
-                    <i class="fas fa-bullhorn text-earth-accent"></i> Platform Pemberdayaan UMKM Kalsel
-                </span>
                 
-                <!-- Judul Utama -->
-                <h1 class="text-4xl md:text-6xl font-serif font-bold text-earth-dark leading-[1.2] md:leading-[1.1] mb-4 md:mb-6">
-                    Pusat Kerajinan Banua <br>
-                    <span class="italic text-earth-accent font-medium">Dari Pengrajin untuk Anda</span>
-                </h1>
-                
-                <!-- Subtitle -->
-                <p class="text-base md:text-lg text-gray-800 md:text-gray-700 mb-8 md:mb-10 leading-relaxed max-w-lg font-medium md:font-normal">
-                    Dukung UMKM lokal Kalimantan Selatan. Beli langsung dari tangan pembuatnya, bergabunglah bersama ribuan pelanggan yang mencintai karya otentik.
-                </p>
-                
-                <!-- Tombol Aksi -->
-                <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
-                    <a href="#marketplace" class="bg-earth-dark text-white text-center px-6 py-3.5 md:px-8 md:py-4 rounded font-medium hover:bg-earth-accent transition flex items-center justify-center gap-3 shadow-lg">
-                        <i class="fas fa-shopping-bag"></i> Mulai Belanja
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="text-kriya-brown font-medium hover:text-kriya-dark transition px-2 py-1 border-b-2 border-kriya-brown">Beranda</a>
+                    <a href="#kategori" class="text-gray-500 font-medium hover:text-kriya-brown transition px-2 py-1 border-b-2 border-transparent hover:border-kriya-earth">Kategori</a>
+                    <a href="#" class="text-gray-500 font-medium hover:text-kriya-brown transition px-2 py-1 border-b-2 border-transparent hover:border-kriya-earth">Tentang Kami</a>
+                    <div class="border-l-2 border-gray-200 h-6 mx-2"></div>
+                    <a href="#" class="bg-kriya-earth/10 text-kriya-brown font-semibold hover:bg-kriya-earth hover:text-white transition px-4 py-2 rounded-full flex items-center text-sm">
+                        <i class="fa-solid fa-shop mr-2"></i> Mulai Jualan
                     </a>
-                    <button onclick="bukaModalJualan()" class="border-2 border-earth-dark text-earth-dark bg-white/50 backdrop-blur-sm md:bg-transparent px-6 py-3.5 md:px-8 md:py-4 rounded font-medium hover:bg-earth-dark hover:text-white transition">
-                        Daftar Sebagai Pengrajin
+                </div>
+
+                <!-- Icons -->
+                <div class="flex items-center space-x-5">
+                    <button class="text-gray-500 hover:text-kriya-brown transition hidden sm:block">
+                        <i class="fa-solid fa-magnifying-glass text-xl"></i>
+                    </button>
+                    <button class="text-gray-500 hover:text-kriya-brown transition relative group">
+                        <i class="fa-solid fa-cart-shopping text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-kriya-green text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center group-hover:bg-kriya-brown transition" id="cart-count">0</span>
+                    </button>
+                    <button class="text-gray-500 hover:text-kriya-brown transition">
+                        <i class="fa-regular fa-user text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
-        
-        <!-- Tombol Scroll ke Bawah -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-            <a href="#marketplace" class="w-10 h-10 md:w-12 md:h-12 bg-earth-dark text-white rounded-full flex items-center justify-center shadow-lg hover:bg-earth-accent transition">
-                <i class="fas fa-arrow-down text-sm md:text-base"></i>
-            </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Texture Anyaman" class="w-full h-full object-cover opacity-30">
+            <div class="absolute inset-0 bg-gradient-to-r from-kriya-light via-kriya-light/90 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-start mt-10 md:mt-16">
+            <span class="px-4 py-1.5 rounded-full bg-kriya-earth/20 text-kriya-brown text-sm font-semibold mb-6 inline-flex items-center border border-kriya-earth/30">
+                <i class="fa-solid fa-handshake text-xs mr-2"></i> Platform Pemberdayaan UMKM Kalsel
+            </span>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-kriya-dark leading-tight max-w-2xl">
+                Pusat Kerajinan Banua <br> <span class="text-kriya-brown italic">Dari Pengrajin untuk Anda</span>
+            </h1>
+            <p class="mt-6 text-lg text-gray-600 max-w-xl leading-relaxed">
+                Dukung UMKM lokal Kalimantan Selatan. Beli langsung dari tangan pembuatnya, atau mulai kembangkan bisnis kerajinan Anda bersama ribuan mitra kami.
+            </p>
+            
+            <div class="mt-8 flex flex-wrap gap-4 w-full">
+                <a href="#kategori" class="bg-kriya-brown hover:bg-kriya-dark text-white px-8 py-3 rounded-full font-medium transition-colors shadow-lg flex items-center justify-center">
+                    <i class="fa-solid fa-bag-shopping mr-2"></i> Mulai Belanja
+                </a>
+                <a href="#" class="bg-white/90 backdrop-blur-sm border-2 border-kriya-brown text-kriya-brown hover:bg-kriya-light px-8 py-3 rounded-full font-medium transition-colors shadow-lg flex items-center justify-center">
+                    <i class="fa-solid fa-store mr-2"></i> Gabung Jadi Penjual
+                </a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="mt-10 w-full max-w-xl relative shadow-lg rounded-full overflow-hidden flex bg-white p-1 border border-gray-100">
+                <div class="pl-4 flex items-center justify-center text-gray-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <input type="text" placeholder="Cari sasirangan, tas anyaman..." class="w-full py-3 px-4 outline-none text-gray-700 placeholder-gray-400 bg-transparent">
+                <button class="bg-kriya-brown hover:bg-kriya-dark text-white px-6 md:px-8 py-3 rounded-full font-medium transition-colors duration-300 whitespace-nowrap">
+                    Cari Kriya
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- BAGIAN MARKETPLACE -->
-    <main id="marketplace" class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20 flex flex-col lg:flex-row gap-6 md:gap-10">
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16" id="kategori">
         
-        <!-- SIDEBAR FILTER -->
-        <aside class="w-full lg:w-1/4 lg:flex-shrink-0">
-            <!-- Search Bar Lokal -->
-            <div class="flex items-center border border-gray-300 rounded-md overflow-hidden bg-white mb-4 md:mb-8">
-                <input type="text" placeholder="Cari karya seni..." class="w-full px-4 py-2 md:py-2.5 outline-none text-sm">
-                <button class="bg-earth-dark text-white px-4 py-2 md:py-2.5 hover:bg-earth-accent transition"><i class="fas fa-search"></i></button>
+        <!-- Mitra UMKM Pilihan Section -->
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-serif font-bold text-kriya-dark">Mitra UMKM Unggulan</h2>
+                <a href="#" class="text-kriya-earth hover:text-kriya-brown text-sm font-medium transition-colors">Lihat Semua Toko <i class="fa-solid fa-chevron-right ml-1 text-xs"></i></a>
             </div>
-
-            <!-- Tombol Toggle Filter (Hanya tampil di HP) -->
-            <button id="toggleFilterBtn" class="w-full lg:hidden bg-white border border-earth-accent text-earth-accent font-semibold py-2.5 rounded mb-4 flex items-center justify-center gap-2">
-                <i class="fas fa-filter"></i> Tampilkan Filter
-            </button>
-
-            <!-- Area Kategori & Filter -->
-            <div id="filterArea" class="hidden lg:block bg-white p-5 md:p-6 rounded-xl shadow-sm border border-gray-200 lg:sticky lg:top-24">
-                <h2 class="font-serif font-bold text-lg md:text-xl mb-4 md:mb-5 text-earth-dark border-b pb-2 md:pb-3">Kategori & Filter</h2>
-                
-                <div class="mb-5 md:mb-6">
-                    <h3 class="font-semibold text-sm mb-3 text-gray-700">Lokasi UMKM</h3>
-                    <div class="flex flex-col gap-2.5">
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent" checked> Banjarmasin</label>
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent"> Banjarbaru</label>
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent"> Martapura</label>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white border border-gray-100 rounded-xl p-4 flex items-center shadow-sm hover:shadow-md transition cursor-pointer group">
+                    <img src="https://ui-avatars.com/api/?name=Galeri+Syifa&background=d4a373&color=fff&rounded=true" alt="Galeri Syifa" class="w-12 h-12 rounded-full mr-3 group-hover:scale-105 transition-transform">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm flex items-center">Galeri Syifa <i class="fa-solid fa-circle-check text-green-500 ml-1 text-[10px]" title="Terverifikasi"></i></h4>
+                        <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot text-kriya-earth mr-1"></i>Banjarmasin</p>
                     </div>
                 </div>
-
-                <div class="mb-5 md:mb-6">
-                    <h3 class="font-semibold text-sm mb-3 text-gray-700">Jenis Kerajinan</h3>
-                    <div class="flex flex-col gap-2.5">
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent" checked> Kain Sasirangan</label>
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent"> Anyaman Purun</label>
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent"> Kerajinan Rotan</label>
+                <div class="bg-white border border-gray-100 rounded-xl p-4 flex items-center shadow-sm hover:shadow-md transition cursor-pointer group">
+                    <img src="https://ui-avatars.com/api/?name=Karya+Rotan&background=606c38&color=fff&rounded=true" alt="Karya Rotan" class="w-12 h-12 rounded-full mr-3 group-hover:scale-105 transition-transform">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">Karya Rotan</h4>
+                        <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot text-kriya-earth mr-1"></i>Banjarbaru</p>
                     </div>
                 </div>
-
-                <button id="btnFilter" class="w-full bg-earth-dark text-white text-sm font-semibold py-3 rounded mt-2 hover:bg-earth-accent transition">Terapkan Filter</button>
-            </div>
-        </aside>
-
-        <!-- AREA GRID PRODUK -->
-        <section class="w-full lg:w-3/4">
-            
-            <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-3 mb-6 border-b pb-4">
-                <h2 class="font-serif text-2xl md:text-3xl font-bold text-earth-dark">Koleksi Terbaru</h2>
-                <select class="text-xs md:text-sm border border-gray-300 rounded px-2 md:px-3 py-1.5 outline-none bg-white self-start sm:self-auto">
-                    <option>Urutkan: Terpopuler</option>
-                    <option>Terbaru</option>
-                    <option>Harga Terendah</option>
-                </select>
-            </div>
-
-            <!-- Grid: 2 kolom di HP, 3 kolom di Laptop -->
-            <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
-                
-                <!-- Kartu Produk 1 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:-translate-y-1 transition duration-300 group flex flex-col h-full">
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=400" alt="Sasirangan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <span class="absolute top-2 left-2 md:top-3 md:left-3 bg-earth-dark text-white text-[8px] md:text-[10px] font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded">TERLARIS</span>
-                    </div>
-                    <div class="p-3 md:p-4 flex flex-col flex-grow">
-                        <h3 class="text-xs md:text-sm font-medium text-gray-800 line-clamp-2 leading-relaxed">Kain Sasirangan Motif Gigi Haruan Pewarna Alam Asli</h3>
-                        <div class="mt-auto pt-3 md:pt-4">
-                            <p class="text-earth-accent font-bold text-sm md:text-lg">Rp 150.000</p>
-                            <div class="flex items-center gap-1 text-[10px] md:text-xs text-gray-500 mt-1">
-                                <i class="fas fa-star text-yellow-400"></i> <span class="font-medium text-gray-700">4.9</span> • 120+ Terjual
-                            </div>
-                            <div class="mt-3 md:mt-4 pt-2 md:pt-3 border-t border-gray-100 flex items-center gap-2">
-                                <i class="fas fa-store-alt text-earth-dark/50 text-xs md:text-sm"></i>
-                                <div class="flex flex-col overflow-hidden">
-                                    <span class="text-[10px] md:text-xs font-semibold text-gray-700 truncate">Galeri Acil Ida</span>
-                                    <span class="text-[8px] md:text-[10px] text-gray-400">Kota Banjarmasin</span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="bg-white border border-gray-100 rounded-xl p-4 flex items-center shadow-sm hover:shadow-md transition cursor-pointer group">
+                    <img src="https://ui-avatars.com/api/?name=Tani+Makmur&background=8b5a2b&color=fff&rounded=true" alt="Tani Makmur" class="w-12 h-12 rounded-full mr-3 group-hover:scale-105 transition-transform">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">Kelompok Tani</h4>
+                        <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot text-kriya-earth mr-1"></i>Tapin</p>
                     </div>
                 </div>
-
-                <!-- Kartu Produk 2 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:-translate-y-1 transition duration-300 group flex flex-col h-full">
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <img src="https://images.unsplash.com/photo-1584346133934-a3afd2a33c4c?w=400" alt="Anyaman" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="p-3 md:p-4 flex flex-col flex-grow">
-                        <h3 class="text-xs md:text-sm font-medium text-gray-800 line-clamp-2 leading-relaxed">Tas Anyaman Purun Etnik Motif Dayak Modern</h3>
-                        <div class="mt-auto pt-3 md:pt-4">
-                            <p class="text-earth-accent font-bold text-sm md:text-lg">Rp 85.000</p>
-                            <div class="flex items-center gap-1 text-[10px] md:text-xs text-gray-500 mt-1">
-                                <i class="fas fa-star text-yellow-400"></i> <span class="font-medium text-gray-700">4.8</span> • 85 Terjual
-                            </div>
-                            <div class="mt-3 md:mt-4 pt-2 md:pt-3 border-t border-gray-100 flex items-center gap-2">
-                                <i class="fas fa-store-alt text-earth-dark/50 text-xs md:text-sm"></i>
-                                <div class="flex flex-col overflow-hidden">
-                                    <span class="text-[10px] md:text-xs font-semibold text-gray-700 truncate">Purun Lestari</span>
-                                    <span class="text-[8px] md:text-[10px] text-gray-400">Kota Banjarbaru</span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="bg-white border border-gray-100 rounded-xl p-4 flex items-center shadow-sm hover:shadow-md transition cursor-pointer group">
+                    <img src="https://ui-avatars.com/api/?name=Acil+Ida&background=3e2723&color=fff&rounded=true" alt="Acil Ida" class="w-12 h-12 rounded-full mr-3 group-hover:scale-105 transition-transform">
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">Toko Acil Ida</h4>
+                        <p class="text-xs text-gray-500"><i class="fa-solid fa-location-dot text-kriya-earth mr-1"></i>Martapura</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Pagination -->
-            <div class="flex justify-center mt-10 md:mt-12 gap-1.5 md:gap-2">
-                <button class="w-8 h-8 md:w-10 md:h-10 border border-gray-300 rounded text-gray-400 disabled:opacity-50 flex items-center justify-center" disabled><i class="fas fa-chevron-left text-[10px] md:text-xs"></i></button>
-                <button class="w-8 h-8 md:w-10 md:h-10 bg-earth-dark text-white rounded font-medium text-sm md:text-base">1</button>
-                <button class="w-8 h-8 md:w-10 md:h-10 border border-gray-300 text-gray-600 rounded hover:bg-gray-50 transition text-sm md:text-base">2</button>
-                <button class="w-8 h-8 md:w-10 md:h-10 border border-gray-300 text-gray-600 rounded hover:bg-gray-50 transition text-sm md:text-base">3</button>
-                <button class="w-8 h-8 md:w-10 md:h-10 border border-gray-300 rounded text-gray-600 hover:bg-gray-50 transition flex items-center justify-center"><i class="fas fa-chevron-right text-[10px] md:text-xs"></i></button>
-            </div>
-
         </section>
+
+        <!-- BAGIAN SKALA BESAR: Flex Container untuk Sidebar & Produk -->
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- 1. SIDEBAR FILTER (Baru) -->
+            <aside class="w-full lg:w-1/4 lg:flex-shrink-0">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 lg:sticky lg:top-28">
+                    <div class="flex items-center justify-between mb-4 border-b pb-3">
+                        <h3 class="font-serif text-lg font-bold text-kriya-dark">Filter Pencarian</h3>
+                        <i class="fa-solid fa-sliders text-gray-400"></i>
+                    </div>
+                    
+                    <!-- Filter Lokasi -->
+                    <div class="mb-6">
+                        <h4 class="font-medium text-sm text-gray-800 mb-3">Lokasi Pengrajin</h4>
+                        <div class="flex flex-col gap-2">
+                            <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer"><input type="checkbox" class="accent-kriya-brown" checked> Banjarmasin</label>
+                            <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer"><input type="checkbox" class="accent-kriya-brown"> Banjarbaru</label>
+                            <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer"><input type="checkbox" class="accent-kriya-brown"> Martapura</label>
+                            <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer"><input type="checkbox" class="accent-kriya-brown"> Tapin</label>
+                        </div>
+                    </div>
+
+                    <!-- Filter Harga -->
+                    <div class="mb-6">
+                        <h4 class="font-medium text-sm text-gray-800 mb-3">Rentang Harga</h4>
+                        <div class="flex items-center gap-2">
+                            <input type="number" placeholder="Min" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-kriya-brown">
+                            <span class="text-gray-400">-</span>
+                            <input type="number" placeholder="Max" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-kriya-brown">
+                        </div>
+                    </div>
+
+                    <!-- Filter Rating -->
+                    <div class="mb-6">
+                        <h4 class="font-medium text-sm text-gray-800 mb-3">Rating Toko</h4>
+                        <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer mb-2">
+                            <input type="checkbox" class="accent-kriya-brown"> 
+                            <span class="text-yellow-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                        </label>
+                        <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                            <input type="checkbox" class="accent-kriya-brown" checked> 
+                            <span class="text-yellow-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span> ke atas
+                        </label>
+                    </div>
+
+                    <button class="w-full bg-kriya-brown text-white py-2.5 rounded-full text-sm font-medium hover:bg-kriya-dark transition shadow-md">Terapkan Filter</button>
+                </div>
+            </aside>
+
+            <!-- 2. AREA PRODUK -->
+            <section class="w-full lg:w-3/4">
+                
+                <!-- Section Header & Category Pills (Tetap dipertahankan) -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6 border-b pb-4">
+                    <div>
+                        <h2 class="text-3xl font-serif font-bold text-kriya-dark mb-2">Jelajahi Koleksi</h2>
+                        <p class="text-gray-500 text-sm">Menampilkan 1-6 dari 124 produk</p>
+                    </div>
+                    
+                    <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-2 w-full md:w-auto">
+                        <button class="category-btn active px-4 py-1.5 rounded-full border border-kriya-brown bg-kriya-brown text-white text-sm font-medium whitespace-nowrap transition" data-target="all">Semua</button>
+                        <button class="category-btn px-4 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-kriya-earth hover:text-kriya-brown text-sm font-medium whitespace-nowrap transition" data-target="sasirangan">Sasirangan</button>
+                        <button class="category-btn px-4 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-kriya-earth hover:text-kriya-brown text-sm font-medium whitespace-nowrap transition" data-target="anyaman">Anyaman</button>
+                        <button class="category-btn px-4 py-1.5 rounded-full border border-gray-300 bg-white text-gray-600 hover:border-kriya-earth hover:text-kriya-brown text-sm font-medium whitespace-nowrap transition" data-target="rotan">Rotan</button>
+                    </div>
+                </div>
+
+                <!-- Product Grid (Disesuaikan jadi 3 kolom agar rapi di sebelah sidebar) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="product-container">
+                    
+                    <!-- Product 1 -->
+                    <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 flex flex-col group" data-category="sasirangan">
+                        <div class="relative h-56 w-full overflow-hidden product-img-wrapper bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kain Sasirangan" class="w-full h-full object-cover">
+                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-bold text-kriya-brown shadow-sm">Sasirangan</div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center mb-3 pb-3 border-b border-gray-50">
+                                <img src="https://ui-avatars.com/api/?name=Galeri+Syifa&background=d4a373&color=fff&rounded=true" alt="Avatar Toko" class="w-6 h-6 rounded-full mr-2">
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-semibold text-gray-700 leading-none">Galeri Syifa</span>
+                                    <span class="text-[10px] text-gray-500 mt-0.5"><i class="fa-solid fa-location-dot text-kriya-earth mr-1"></i>Banjarmasin</span>
+                                </div>
+                            </div>
+                            <h3 class="font-serif text-base font-bold text-kriya-dark mb-1 line-clamp-2 leading-snug">Kain Sasirangan Motif Gigi Haruan Premium</h3>
+                            <div class="flex items-center text-xs text-yellow-500 mb-2">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                                <span class="text-gray-400 ml-1 text-[10px]">(45 Terjual)</span>
+                            </div>
+                            <div class="mt-auto pt-2 flex items-center justify-between">
+                                <span class="text-lg font-bold text-kriya-brown">Rp 150.000</span>
+                                <button onclick="addToCart('Kain Sasirangan Motif Gigi Haruan')" class="bg-kriya-light border border-kriya-earth text-kriya-brown hover:bg-kriya-brown hover:text-white h-9 w-9 rounded-full flex items-center justify-center transition-colors shadow-sm"><i class="fa-solid fa-cart-plus text-sm"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 flex flex-col group" data-category="anyaman">
+                        <div class="relative h-56 w-full overflow-hidden product-img-wrapper bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1591815302811-9a7c3cece0f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tas Anyaman Purun" class="w-full h-full object-cover">
+                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-bold text-kriya-green shadow-sm">Anyaman</div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center mb-3 pb-3 border-b border-gray-50">
+                                <img src="https://ui-avatars.com/api/?name=Acil+Ida&background=3e2723&color=fff&rounded=true" alt="Avatar Toko" class="w-6 h-6 rounded-full mr-2">
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-semibold text-gray-700 leading-none">Toko Acil Ida</span>
+                                    <span class="text-[10px] text-gray-500 mt-0.5"><i class="fa-solid fa-location-dot text-kriya-earth mr-1"></i>Amuntai</span>
+                                </div>
+                            </div>
+                            <h3 class="font-serif text-base font-bold text-kriya-dark mb-1 line-clamp-2 leading-snug">Tas Bakul Purun Selempang Modern</h3>
+                            <div class="flex items-center text-xs text-yellow-500 mb-2">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                                <span class="text-gray-400 ml-1 text-[10px]">(12 Terjual)</span>
+                            </div>
+                            <div class="mt-auto pt-2 flex items-center justify-between">
+                                <span class="text-lg font-bold text-kriya-brown">Rp 85.000</span>
+                                <button onclick="addToCart('Tas Bakul Purun Selempang')" class="bg-kriya-light border border-kriya-earth text-kriya-brown hover:bg-kriya-brown hover:text-white h-9 w-9 rounded-full flex items-center justify-center transition-colors shadow-sm"><i class="fa-solid fa-cart-plus text-sm"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 flex flex-col group" data-category="rotan">
+                        <div class="relative h-56 w-full overflow-hidden product-img-wrapper bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kursi Rotan" class="w-full h-full object-cover">
+                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-bold text-kriya-earth shadow-sm">Rotan</div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center mb-3 pb-3 border-b border-gray-50">
+                                <img src="https://ui-avatars.com/api/?name=Karya+Rotan&background=606c38&color=fff&rounded=true" alt="Avatar Toko" class="w-6 h-6 rounded-full mr-2">
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-semibold text-gray-700 leading-none">Karya Rotan</span>
+                                    <span class="text-[10px] text-gray-500 mt-0.5"><i class="fa-solid fa-location-dot text-kriya-earth mr-1"></i>Banjarbaru</span>
+                                </div>
+                            </div>
+                            <h3 class="font-serif text-base font-bold text-kriya-dark mb-1 line-clamp-2 leading-snug">Kursi Santai Rotan Estetik (Indoor)</h3>
+                            <div class="flex items-center text-xs text-yellow-500 mb-2">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-gray-400 ml-1 text-[10px]">(5 Terjual)</span>
+                            </div>
+                            <div class="mt-auto pt-2 flex items-center justify-between">
+                                <span class="text-lg font-bold text-kriya-brown">Rp 450.000</span>
+                                <button onclick="addToCart('Kursi Santai Rotan')" class="bg-kriya-brown text-white hover:bg-kriya-dark px-4 py-1.5 rounded-full text-xs font-medium transition-colors shadow-sm flex items-center">Beli <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination Skala Besar (Baru) -->
+                <div class="mt-12 pt-8 border-t border-gray-200 flex justify-center items-center space-x-2">
+                    <button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 disabled:opacity-50" disabled><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                    <button class="w-10 h-10 rounded-full bg-kriya-brown text-white font-medium shadow-sm">1</button>
+                    <button class="w-10 h-10 rounded-full border border-gray-200 text-gray-600 hover:border-kriya-brown hover:text-kriya-brown transition font-medium">2</button>
+                    <button class="w-10 h-10 rounded-full border border-gray-200 text-gray-600 hover:border-kriya-brown hover:text-kriya-brown transition font-medium">3</button>
+                    <span class="text-gray-400 px-1">...</span>
+                    <button class="w-10 h-10 rounded-full border border-gray-200 text-gray-600 hover:border-kriya-brown hover:text-kriya-brown transition font-medium">12</button>
+                    <button class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:border-kriya-brown hover:text-kriya-brown transition"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+                </div>
+
+            </section>
+        </div>
+
     </main>
 
+    <!-- Value Proposition Section (Tetap Dipertahankan) -->
+    <section class="bg-kriya-dark text-white py-16 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left border-t border-b border-gray-700 py-10">
+                <div class="flex flex-col items-center md:items-start p-4">
+                    <div class="w-14 h-14 bg-kriya-brown rounded-full flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <h4 class="font-serif text-xl font-bold mb-2">100% Buatan Tangan</h4>
+                    <p class="text-gray-400 text-sm">Setiap produk dibuat dengan teliti oleh tangan terampil pengrajin lokal asli Banua.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-start p-4">
+                    <div class="w-14 h-14 bg-kriya-brown rounded-full flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-earth-asia"></i>
+                    </div>
+                    <h4 class="font-serif text-xl font-bold mb-2">Bahan Ramah Lingkungan</h4>
+                    <p class="text-gray-400 text-sm">Menggunakan material alami seperti purun dan pewarna alami yang aman bagi bumi.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-start p-4">
+                    <div class="w-14 h-14 bg-kriya-brown rounded-full flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-people-carry-box"></i>
+                    </div>
+                    <h4 class="font-serif text-xl font-bold mb-2">Pemberdayaan Lokal</h4>
+                    <p class="text-gray-400 text-sm">Membeli di sini berarti Anda mendukung langsung perekonomian UMKM di Kalimantan Selatan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer class="bg-earth-dark text-white/80 py-6 md:py-8 text-center text-xs md:text-sm px-4">
-        <p>&copy; 2026 KriyaLokal. Proyek E-Commerce Pemberdayaan UMKM Kalsel.</p>
+    <footer class="bg-white py-10 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-kriya-brown flex items-center justify-center mr-2 text-white text-sm">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <span class="font-serif font-bold text-xl text-kriya-dark">KriyaBanua.</span>
+            </div>
+            <p class="text-gray-500 text-sm text-center md:text-left">
+                &copy; 2026 KriyaBanua Marketplace. Tugas E-Commerce FTI UNISKA.
+            </p>
+            <div class="flex space-x-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-kriya-brown hover:text-white transition">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-kriya-brown hover:text-white transition">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
     </footer>
 
-    <!-- Link ke file Script terpisah -->
+    <!-- Custom Toast Notification -->
+    <div id="toast-container" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Hubungkan ke file JS eksternal -->
     <script src="script.js"></script>
 </body>
 </html>

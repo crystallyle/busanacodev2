@@ -3,146 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KriyaLokal - Marketplace Kerajinan Kalsel</title>
+    <title>Pusat Kerajinan Banua - Marketplace UMKM Kalsel</title>
+    <!-- Script Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Konfigurasi warna earthy kustom untuk Tailwind -->
+    <!-- Konfigurasi Warna Khusus (Harus tetap di HTML jika pakai CDN) -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        earth: {
-                            light: '#fdfbf7', // Krem sangat terang untuk background
-                            muted: '#e8e4d9', // Krem abu untuk border
-                            accent: '#d4a373', // Coklat tanah/rotan
-                            green: '#4a5d23', // Hijau lumut/daun
-                            dark: '#3e2723'   // Coklat gelap
-                        }
+                        earth: { base: '#F9F6F0', dark: '#4A3320', accent: '#8B5A2B', green: '#556B2F', card: '#FFFFFF' }
                     }
                 }
             }
         }
     </script>
+    <!-- Link ke file CSS terpisah -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Ikon FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-earth-light text-earth-dark font-sans">
+<body class="bg-earth-base text-gray-800">
 
-    <!-- Navbar (Sticky) -->
-    <nav class="bg-white shadow-sm border-b border-earth-muted fixed w-full z-50 top-0">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-6">
-            <!-- Logo -->
-            <div class="text-2xl font-bold text-earth-green tracking-tight">Kriya<span class="text-earth-accent">Lokal</span></div>
+    <!-- NAVBAR -->
+    <nav class="absolute w-full z-50 top-0 py-4 md:py-5">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
+            <div class="text-xl md:text-2xl font-serif font-bold text-earth-dark">Kriya<span class="text-earth-accent">Lokal</span></div>
             
-            <!-- Search Bar -->
-            <div class="flex-grow flex items-center border border-earth-muted rounded-md overflow-hidden bg-earth-light/50 focus-within:border-earth-green transition-colors">
-                <select class="bg-transparent px-3 py-2 text-sm border-r border-earth-muted outline-none hidden md:block text-gray-600">
-                    <option>Semua Kategori</option>
-                    <option>Sasirangan</option>
-                    <option>Anyaman</option>
-                </select>
-                <input type="text" placeholder="Cari karya pengrajin atau toko UMKM..." class="w-full px-4 py-2 outline-none text-sm bg-transparent">
-                <button class="bg-earth-green text-white px-5 py-2 hover:bg-opacity-90 transition"><i class="fas fa-search"></i></button>
-            </div>
-
             <!-- Menu Kanan -->
-            <div class="flex items-center gap-5">
-                <button onclick="bukaModalJualan()" class="hidden md:flex items-center gap-2 text-sm font-semibold text-earth-accent border border-earth-accent px-4 py-1.5 rounded-md hover:bg-earth-accent hover:text-white transition">
-                    <i class="fas fa-store"></i> Mulai Jualan
-                </button>
-                <div class="relative cursor-pointer text-gray-600 hover:text-earth-green transition">
-                    <i class="fas fa-shopping-cart text-xl"></i>
-                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+            <div class="flex items-center gap-4 md:gap-6">
+                <a href="#marketplace" class="hidden md:block text-sm font-medium text-earth-dark hover:text-earth-accent transition">Belanja</a>
+                <button onclick="bukaModalJualan()" class="hidden md:block text-sm font-medium text-earth-dark hover:text-earth-accent transition">Mulai Jualan</button>
+                
+                <div class="relative cursor-pointer text-earth-dark hover:text-earth-accent transition">
+                    <i class="fas fa-shopping-bag text-lg md:text-xl"></i>
+                    <span class="absolute -top-1.5 -right-1.5 bg-earth-accent text-white text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
                 </div>
-                <div class="w-8 h-8 bg-gray-200 rounded-full overflow-hidden border border-earth-muted">
-                    <img src="https://ui-avatars.com/api/?name=Pembeli&background=d4a373&color=fff" alt="Profile" class="w-full h-full object-cover">
+                <div class="w-8 h-8 md:w-9 md:h-9 bg-gray-200 rounded-full overflow-hidden border border-earth-dark/20">
+                    <img src="https://ui-avatars.com/api/?name=Pembeli&background=4A3320&color=fff" alt="Profile" class="w-full h-full object-cover">
                 </div>
+                <!-- Tombol Menu HP -->
+                <button class="md:hidden text-earth-dark text-xl"><i class="fas fa-bars"></i></button>
             </div>
         </div>
     </nav>
 
-    <!-- Konten Utama -->
-    <main class="max-w-7xl mx-auto px-4 pt-24 pb-12 flex flex-col lg:flex-row gap-8">
+    <!-- HERO SECTION (Landing Page Elegan) -->
+    <header class="hero-bg min-h-screen flex items-center pt-16 relative">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 w-full relative z-10">
+            <div class="max-w-2xl">
+                <!-- Badge Atas -->
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-md bg-[#EFE9DD] text-earth-dark text-[10px] md:text-xs font-semibold tracking-wide mb-4 md:mb-6 uppercase">
+                    <i class="fas fa-bullhorn text-earth-accent"></i> Platform Pemberdayaan UMKM Kalsel
+                </span>
+                
+                <!-- Judul Utama -->
+                <h1 class="text-4xl md:text-6xl font-serif font-bold text-earth-dark leading-[1.2] md:leading-[1.1] mb-4 md:mb-6">
+                    Pusat Kerajinan Banua <br>
+                    <span class="italic text-earth-accent font-medium">Dari Pengrajin untuk Anda</span>
+                </h1>
+                
+                <!-- Subtitle -->
+                <p class="text-base md:text-lg text-gray-800 md:text-gray-700 mb-8 md:mb-10 leading-relaxed max-w-lg font-medium md:font-normal">
+                    Dukung UMKM lokal Kalimantan Selatan. Beli langsung dari tangan pembuatnya, bergabunglah bersama ribuan pelanggan yang mencintai karya otentik.
+                </p>
+                
+                <!-- Tombol Aksi -->
+                <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
+                    <a href="#marketplace" class="bg-earth-dark text-white text-center px-6 py-3.5 md:px-8 md:py-4 rounded font-medium hover:bg-earth-accent transition flex items-center justify-center gap-3 shadow-lg">
+                        <i class="fas fa-shopping-bag"></i> Mulai Belanja
+                    </a>
+                    <button onclick="bukaModalJualan()" class="border-2 border-earth-dark text-earth-dark bg-white/50 backdrop-blur-sm md:bg-transparent px-6 py-3.5 md:px-8 md:py-4 rounded font-medium hover:bg-earth-dark hover:text-white transition">
+                        Daftar Sebagai Pengrajin
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tombol Scroll ke Bawah -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+            <a href="#marketplace" class="w-10 h-10 md:w-12 md:h-12 bg-earth-dark text-white rounded-full flex items-center justify-center shadow-lg hover:bg-earth-accent transition">
+                <i class="fas fa-arrow-down text-sm md:text-base"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- BAGIAN MARKETPLACE -->
+    <main id="marketplace" class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20 flex flex-col lg:flex-row gap-6 md:gap-10">
         
         <!-- SIDEBAR FILTER -->
         <aside class="w-full lg:w-1/4 lg:flex-shrink-0">
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-earth-muted sticky top-24">
-                <h2 class="font-bold text-lg mb-4 text-earth-green flex items-center gap-2">
-                    <i class="fas fa-sliders-h"></i> Filter Pencarian
-                </h2>
+            <!-- Search Bar Lokal -->
+            <div class="flex items-center border border-gray-300 rounded-md overflow-hidden bg-white mb-4 md:mb-8">
+                <input type="text" placeholder="Cari karya seni..." class="w-full px-4 py-2 md:py-2.5 outline-none text-sm">
+                <button class="bg-earth-dark text-white px-4 py-2 md:py-2.5 hover:bg-earth-accent transition"><i class="fas fa-search"></i></button>
+            </div>
+
+            <!-- Tombol Toggle Filter (Hanya tampil di HP) -->
+            <button id="toggleFilterBtn" class="w-full lg:hidden bg-white border border-earth-accent text-earth-accent font-semibold py-2.5 rounded mb-4 flex items-center justify-center gap-2">
+                <i class="fas fa-filter"></i> Tampilkan Filter
+            </button>
+
+            <!-- Area Kategori & Filter -->
+            <div id="filterArea" class="hidden lg:block bg-white p-5 md:p-6 rounded-xl shadow-sm border border-gray-200 lg:sticky lg:top-24">
+                <h2 class="font-serif font-bold text-lg md:text-xl mb-4 md:mb-5 text-earth-dark border-b pb-2 md:pb-3">Kategori & Filter</h2>
                 
-                <!-- Filter Lokasi -->
-                <div class="mb-5">
-                    <h3 class="font-semibold text-sm mb-3 text-gray-700">Lokasi Pengrajin</h3>
-                    <div class="flex flex-col gap-2">
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-green"><input type="checkbox" class="w-4 h-4 rounded text-earth-green focus:ring-earth-green accent-earth-green" checked> Banjarmasin</label>
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-green"><input type="checkbox" class="w-4 h-4 rounded accent-earth-green"> Banjarbaru</label>
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-green"><input type="checkbox" class="w-4 h-4 rounded accent-earth-green"> Martapura</label>
+                <div class="mb-5 md:mb-6">
+                    <h3 class="font-semibold text-sm mb-3 text-gray-700">Lokasi UMKM</h3>
+                    <div class="flex flex-col gap-2.5">
+                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent" checked> Banjarmasin</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent"> Banjarbaru</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent"> Martapura</label>
                     </div>
                 </div>
 
-                <!-- Filter Kategori -->
-                <div class="mb-5">
-                    <h3 class="font-semibold text-sm mb-3 text-gray-700">Kategori Karya</h3>
-                    <div class="flex flex-col gap-2">
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-green"><input type="checkbox" class="w-4 h-4 rounded accent-earth-green" checked> Kain Sasirangan</label>
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-green"><input type="checkbox" class="w-4 h-4 rounded accent-earth-green"> Anyaman Purun</label>
-                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-green"><input type="checkbox" class="w-4 h-4 rounded accent-earth-green"> Kerajinan Rotan</label>
+                <div class="mb-5 md:mb-6">
+                    <h3 class="font-semibold text-sm mb-3 text-gray-700">Jenis Kerajinan</h3>
+                    <div class="flex flex-col gap-2.5">
+                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent" checked> Kain Sasirangan</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent"> Anyaman Purun</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer hover:text-earth-accent"><input type="checkbox" class="w-4 h-4 accent-earth-accent"> Kerajinan Rotan</label>
                     </div>
                 </div>
 
-                <button class="w-full bg-earth-green text-white text-sm font-semibold py-2.5 rounded-lg mt-2 hover:bg-opacity-90 transition">Terapkan Filter</button>
+                <button id="btnFilter" class="w-full bg-earth-dark text-white text-sm font-semibold py-3 rounded mt-2 hover:bg-earth-accent transition">Terapkan Filter</button>
             </div>
         </aside>
 
-        <!-- AREA PRODUK -->
+        <!-- AREA GRID PRODUK -->
         <section class="w-full lg:w-3/4">
             
-            <!-- Banner Utama (Hero Section) -->
-            <div class="relative bg-earth-green rounded-xl overflow-hidden shadow-sm mb-8 flex items-center min-h-[160px]">
-                <!-- Pola background ilustratif -->
-                <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/woven-light.png')]"></div>
-                
-                <div class="relative z-10 p-8 text-white w-full flex justify-between items-center">
-                    <div class="max-w-md">
-                        <h1 class="text-2xl md:text-3xl font-bold mb-2">Dukung UMKM Kalsel</h1>
-                        <p class="text-sm md:text-base opacity-90 text-earth-light">Temukan mahakarya otentik, langsung dari tangan pengrajin lokal Banua.</p>
-                    </div>
-                    <div class="hidden md:block">
-                        <i class="fas fa-leaf text-6xl opacity-20 transform -rotate-12"></i>
-                    </div>
-                </div>
+            <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-3 mb-6 border-b pb-4">
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-earth-dark">Koleksi Terbaru</h2>
+                <select class="text-xs md:text-sm border border-gray-300 rounded px-2 md:px-3 py-1.5 outline-none bg-white self-start sm:self-auto">
+                    <option>Urutkan: Terpopuler</option>
+                    <option>Terbaru</option>
+                    <option>Harga Terendah</option>
+                </select>
             </div>
 
-            <!-- Grid Produk -->
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+            <!-- Grid: 2 kolom di HP, 3 kolom di Laptop -->
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
                 
                 <!-- Kartu Produk 1 -->
-                <div class="bg-white rounded-xl shadow-sm border border-earth-muted overflow-hidden card-hover group flex flex-col h-full">
-                    <div class="relative overflow-hidden aspect-square">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:-translate-y-1 transition duration-300 group flex flex-col h-full">
+                    <div class="relative overflow-hidden aspect-[4/3]">
                         <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=400" alt="Sasirangan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <span class="absolute top-2 left-2 bg-white/90 backdrop-blur-sm text-earth-green text-[10px] font-bold px-2 py-1 rounded">Terlaris</span>
+                        <span class="absolute top-2 left-2 md:top-3 md:left-3 bg-earth-dark text-white text-[8px] md:text-[10px] font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded">TERLARIS</span>
                     </div>
-                    <div class="p-4 flex flex-col flex-grow">
-                        <h3 class="text-sm font-medium text-gray-800 product-title line-clamp-2 leading-relaxed">Kain Sasirangan Motif Gigi Haruan Pewarna Alam Asli Handmade</h3>
-                        <div class="mt-auto pt-3">
-                            <p class="text-earth-accent font-bold text-lg">Rp 150.000</p>
-                            
-                            <!-- Reputasi -->
-                            <div class="flex items-center gap-1 text-[11px] text-gray-500 mt-1.5">
-                                <i class="fas fa-star text-yellow-400"></i> <span class="font-medium text-gray-700">4.9</span> <span class="mx-1">•</span> Terjual 120+
+                    <div class="p-3 md:p-4 flex flex-col flex-grow">
+                        <h3 class="text-xs md:text-sm font-medium text-gray-800 line-clamp-2 leading-relaxed">Kain Sasirangan Motif Gigi Haruan Pewarna Alam Asli</h3>
+                        <div class="mt-auto pt-3 md:pt-4">
+                            <p class="text-earth-accent font-bold text-sm md:text-lg">Rp 150.000</p>
+                            <div class="flex items-center gap-1 text-[10px] md:text-xs text-gray-500 mt-1">
+                                <i class="fas fa-star text-yellow-400"></i> <span class="font-medium text-gray-700">4.9</span> • 120+ Terjual
                             </div>
-                            
-                            <!-- Identitas Toko UMKM -->
-                            <div class="mt-3 pt-3 border-t border-gray-100">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-5 h-5 rounded-full bg-earth-light flex items-center justify-center border border-earth-muted text-earth-green">
-                                        <i class="fas fa-store text-[10px]"></i>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span class="text-xs font-medium text-gray-700 truncate w-32">Galeri Acil Ida</span>
-                                        <span class="text-[10px] text-gray-400">Kota Banjarmasin</span>
-                                    </div>
+                            <div class="mt-3 md:mt-4 pt-2 md:pt-3 border-t border-gray-100 flex items-center gap-2">
+                                <i class="fas fa-store-alt text-earth-dark/50 text-xs md:text-sm"></i>
+                                <div class="flex flex-col overflow-hidden">
+                                    <span class="text-[10px] md:text-xs font-semibold text-gray-700 truncate">Galeri Acil Ida</span>
+                                    <span class="text-[8px] md:text-[10px] text-gray-400">Kota Banjarmasin</span>
                                 </div>
                             </div>
                         </div>
@@ -150,73 +170,47 @@
                 </div>
 
                 <!-- Kartu Produk 2 -->
-                <div class="bg-white rounded-xl shadow-sm border border-earth-muted overflow-hidden card-hover group flex flex-col h-full">
-                    <div class="relative overflow-hidden aspect-square">
-                        <img src="https://images.unsplash.com/photo-1596482163907-55099276d494?w=400" alt="Anyaman" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:-translate-y-1 transition duration-300 group flex flex-col h-full">
+                    <div class="relative overflow-hidden aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1584346133934-a3afd2a33c4c?w=400" alt="Anyaman" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
-                    <div class="p-4 flex flex-col flex-grow">
-                        <h3 class="text-sm font-medium text-gray-800 product-title line-clamp-2 leading-relaxed">Tas Anyaman Purun Ramah Lingkungan Motif Etnik Dayak</h3>
-                        <div class="mt-auto pt-3">
-                            <p class="text-earth-accent font-bold text-lg">Rp 85.000</p>
-                            <div class="flex items-center gap-1 text-[11px] text-gray-500 mt-1.5">
-                                <i class="fas fa-star text-yellow-400"></i> <span class="font-medium text-gray-700">4.8</span> <span class="mx-1">•</span> Terjual 85
+                    <div class="p-3 md:p-4 flex flex-col flex-grow">
+                        <h3 class="text-xs md:text-sm font-medium text-gray-800 line-clamp-2 leading-relaxed">Tas Anyaman Purun Etnik Motif Dayak Modern</h3>
+                        <div class="mt-auto pt-3 md:pt-4">
+                            <p class="text-earth-accent font-bold text-sm md:text-lg">Rp 85.000</p>
+                            <div class="flex items-center gap-1 text-[10px] md:text-xs text-gray-500 mt-1">
+                                <i class="fas fa-star text-yellow-400"></i> <span class="font-medium text-gray-700">4.8</span> • 85 Terjual
                             </div>
-                            <div class="mt-3 pt-3 border-t border-gray-100">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-5 h-5 rounded-full bg-earth-light flex items-center justify-center border border-earth-muted text-earth-green">
-                                        <i class="fas fa-store text-[10px]"></i>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span class="text-xs font-medium text-gray-700 truncate w-32">Purun Lestari</span>
-                                        <span class="text-[10px] text-gray-400">Kota Banjarbaru</span>
-                                    </div>
+                            <div class="mt-3 md:mt-4 pt-2 md:pt-3 border-t border-gray-100 flex items-center gap-2">
+                                <i class="fas fa-store-alt text-earth-dark/50 text-xs md:text-sm"></i>
+                                <div class="flex flex-col overflow-hidden">
+                                    <span class="text-[10px] md:text-xs font-semibold text-gray-700 truncate">Purun Lestari</span>
+                                    <span class="text-[8px] md:text-[10px] text-gray-400">Kota Banjarbaru</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Kartu Produk 3 -->
-                <div class="bg-white rounded-xl shadow-sm border border-earth-muted overflow-hidden card-hover group flex flex-col h-full">
-                    <div class="relative overflow-hidden aspect-square bg-gray-100 flex items-center justify-center">
-                        <i class="fas fa-image text-4xl text-gray-300"></i>
-                    </div>
-                    <div class="p-4 flex flex-col flex-grow">
-                        <h3 class="text-sm font-medium text-gray-800 product-title line-clamp-2 leading-relaxed">Mandau Hias Ukiran Tradisional Dayak Meratus</h3>
-                        <div class="mt-auto pt-3">
-                            <p class="text-earth-accent font-bold text-lg">Rp 450.000</p>
-                            <div class="flex items-center gap-1 text-[11px] text-gray-500 mt-1.5">
-                                <i class="fas fa-star text-yellow-400"></i> <span class="font-medium text-gray-700">5.0</span> <span class="mx-1">•</span> Terjual 12
-                            </div>
-                            <div class="mt-3 pt-3 border-t border-gray-100">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-5 h-5 rounded-full bg-earth-light flex items-center justify-center border border-earth-muted text-earth-green">
-                                        <i class="fas fa-store text-[10px]"></i>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span class="text-xs font-medium text-gray-700 truncate w-32">Seni Kriya Meratus</span>
-                                        <span class="text-[10px] text-gray-400">Kab. Hulu Sungai Tengah</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
-            <!-- Navigasi Halaman (Pagination) -->
-            <div class="flex justify-center mt-10 gap-2">
-                <button class="w-10 h-10 flex items-center justify-center border border-earth-muted rounded-lg text-gray-400 hover:bg-earth-light transition disabled:opacity-50" disabled><i class="fas fa-chevron-left text-xs"></i></button>
-                <button class="w-10 h-10 flex items-center justify-center border-none bg-earth-green rounded-lg text-white font-medium shadow-sm">1</button>
-                <button class="w-10 h-10 flex items-center justify-center border border-earth-muted rounded-lg text-gray-600 hover:bg-earth-light hover:border-earth-green hover:text-earth-green transition font-medium">2</button>
-                <button class="w-10 h-10 flex items-center justify-center border border-earth-muted rounded-lg text-gray-600 hover:bg-earth-light hover:border-earth-green hover:text-earth-green transition font-medium">3</button>
-                <button class="w-10 h-10 flex items-center justify-center border border-earth-muted rounded-lg text-gray-600 hover:bg-earth-light transition"><i class="fas fa-chevron-right text-xs"></i></button>
+            <!-- Pagination -->
+            <div class="flex justify-center mt-10 md:mt-12 gap-1.5 md:gap-2">
+                <button class="w-8 h-8 md:w-10 md:h-10 border border-gray-300 rounded text-gray-400 disabled:opacity-50 flex items-center justify-center" disabled><i class="fas fa-chevron-left text-[10px] md:text-xs"></i></button>
+                <button class="w-8 h-8 md:w-10 md:h-10 bg-earth-dark text-white rounded font-medium text-sm md:text-base">1</button>
+                <button class="w-8 h-8 md:w-10 md:h-10 border border-gray-300 text-gray-600 rounded hover:bg-gray-50 transition text-sm md:text-base">2</button>
+                <button class="w-8 h-8 md:w-10 md:h-10 border border-gray-300 text-gray-600 rounded hover:bg-gray-50 transition text-sm md:text-base">3</button>
+                <button class="w-8 h-8 md:w-10 md:h-10 border border-gray-300 rounded text-gray-600 hover:bg-gray-50 transition flex items-center justify-center"><i class="fas fa-chevron-right text-[10px] md:text-xs"></i></button>
             </div>
 
         </section>
     </main>
 
+    <!-- Footer -->
+    <footer class="bg-earth-dark text-white/80 py-6 md:py-8 text-center text-xs md:text-sm px-4">
+        <p>&copy; 2026 KriyaLokal. Proyek E-Commerce Pemberdayaan UMKM Kalsel.</p>
+    </footer>
+
+    <!-- Link ke file Script terpisah -->
     <script src="script.js"></script>
 </body>
 </html>

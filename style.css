@@ -1,7 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Mengimpor Font Utama (Inter untuk teks biasa, Playfair Display untuk judul elegan) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap');
 
 body {
     font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+h1, h2, .font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Background Hero Section */
+.hero-bg {
+    /* Gradasi transparan agar teks terbaca, ditumpuk di atas gambar latar */
+    background-image: linear-gradient(to right, rgba(249, 246, 240, 0.95) 45%, rgba(249, 246, 240, 0.2)), 
+                      url('https://images.unsplash.com/photo-1596482163907-55099276d494?q=80&w=2000&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Optimasi Background Hero untuk Layar HP (Mobile) */
+@media (max-width: 768px) {
+    .hero-bg {
+        /* Di layar HP, gradasi dibuat lebih gelap dari atas ke bawah agar seluruh teks aman */
+        background-image: linear-gradient(to bottom, rgba(249, 246, 240, 0.95) 30%, rgba(249, 246, 240, 0.8)), 
+                          url('https://images.unsplash.com/photo-1596482163907-55099276d494?q=80&w=2000&auto=format&fit=crop');
+    }
+}
+
+/* Membatasi teks judul produk maksimal 2 baris agar kotak kartu sama rata */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    min-height: 2.5rem; 
 }
 
 /* Custom Scrollbar */
@@ -9,31 +42,9 @@ body {
     width: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: #fdfbf7; 
+    background: #F9F6F0;
 }
 ::-webkit-scrollbar-thumb {
-    background: #d4a373; 
+    background: #8B5A2B;
     border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #4a5d23; 
-}
-
-/* Membatasi teks judul produk maksimal 2 baris (sangat penting agar tinggi kartu sejajar) */
-.line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;  
-    overflow: hidden;
-    min-height: 2.75rem; 
-}
-
-/* Efek interaksi ringan saat kursor diarahkan ke produk */
-.card-hover {
-    transition: all 0.3s ease;
-}
-.card-hover:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-    border-color: #4a5d23;
 }

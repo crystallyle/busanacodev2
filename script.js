@@ -1,28 +1,47 @@
-// Membuka modal pendaftaran UMKM
+// Fungsi untuk tombol "Mulai Jualan"
 function bukaModalJualan() {
-    alert("Daftar sebagai Penjual/Mitra UMKM\n\nSyarat Pendaftaran:\n1. KTP & NIB (Jika ada)\n2. Lokasi Workshop/Produksi di Kalsel\n3. Foto Produk Kerajinan Asli\n\n(Nantinya ini akan diarahkan ke halaman Register Role: Seller)");
+    alert("Daftar sebagai Penjual/Mitra UMKM\n\n(Di sistem nyata, tombol ini akan membuka form registrasi Role: Seller)");
 }
 
-// Simulasi tombol keranjang
-const cartIcon = document.querySelector('.fa-shopping-cart').parentElement;
-cartIcon.addEventListener('click', () => {
-    alert("Menampilkan Drawer Keranjang Belanja Anda.");
-});
+// Logika untuk menampilkan/menyembunyikan Sidebar Filter di layar HP (Mobile)
+const toggleFilterBtn = document.getElementById('toggleFilterBtn');
+const filterArea = document.getElementById('filterArea');
 
-// Simulasi tombol filter
-const filterBtn = document.querySelector('button:contains("Terapkan Filter")');
-if(filterBtn) {
-    filterBtn.addEventListener('click', (e) => {
+if (toggleFilterBtn && filterArea) {
+    toggleFilterBtn.addEventListener('click', () => {
+        // Toggle class 'hidden' untuk menampilkan/menyembunyikan filter
+        filterArea.classList.toggle('hidden');
+        
+        // Ubah teks tombol sesuai kondisi
+        if (filterArea.classList.contains('hidden')) {
+            toggleFilterBtn.innerHTML = '<i class="fas fa-filter"></i> Tampilkan Filter';
+        } else {
+            toggleFilterBtn.innerHTML = '<i class="fas fa-times"></i> Sembunyikan Filter';
+        }
+    });
+}
+
+// Efek Loading Simulasi saat menekan tombol "Terapkan Filter"
+const btnFilter = document.getElementById('btnFilter');
+if (btnFilter) {
+    btnFilter.addEventListener('click', (e) => {
         const btn = e.target;
         const originalText = btn.innerText;
-        btn.innerText = "Memuat...";
+        
+        // Ubah state tombol
+        btn.innerText = "Memuat data...";
         btn.style.opacity = "0.7";
         
-        // Simulasi loading dari database
+        // Kembalikan seperti semula setelah 1 detik (simulasi request ke server)
         setTimeout(() => {
             btn.innerText = originalText;
             btn.style.opacity = "1";
-            console.log("Data produk difilter (simulasi).");
-        }, 800);
+            
+            // Di HP, otomatis sembunyikan filter lagi setelah diterapkan agar kembali melihat produk
+            if (window.innerWidth < 1024) { // 1024px adalah batas layar laptop (lg)
+                filterArea.classList.add('hidden');
+                toggleFilterBtn.innerHTML = '<i class="fas fa-filter"></i> Tampilkan Filter';
+            }
+        }, 1000);
     });
 }
